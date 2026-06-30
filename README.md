@@ -1,3 +1,18 @@
+> ## 🍴 Community fork — adds BIP-110 (UASF)
+>
+> This is a **fork of [jstefanop/apolloapi-v2](https://github.com/jstefanop/apolloapi-v2)** that adds
+> **Bitcoin Knots 29.3 + BIP-110** as a selectable node client, so FutureBit Apollo owners can opt in to
+> running and **signalling** the BIP-110 soft fork.
+>
+> - 📖 **Setup, binary provenance & risks:** [`BIP110-FORK.md`](./BIP110-FORK.md)
+> - ⚡ **One-command install** (review it first): `curl -fsSLO https://raw.githubusercontent.com/cmyk/apolloapi-v2/main/bip110-install.sh && less bip110-install.sh && sudo bash bip110-install.sh`
+> - 🖥️ **Frontend companion:** [cmyk/apolloui-v2](https://github.com/cmyk/apolloui-v2)
+> - ⚠️ BIP-110 is **contested**; enforcement carries a chain-split risk at the ~Aug 7 2026 flag day. Opt-in only — revert any time with `sudo bash bip110-install.sh --revert`.
+>
+> *Everything below is the original upstream README.*
+
+---
+
 # Apollo API v2
 
 Backend and device management service for Apollo systems. In production this repo is installed on the device at `/opt/apolloapi`, runs the API directly with Node.js, builds the UI on-device, and manages miner/node/solo services through `systemd`.
