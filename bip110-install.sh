@@ -102,7 +102,7 @@ fi
 
 # --- run the Apollo's own update (git reset --hard + pull + yarn + restart) ---
 info "running the Apollo updater against the new remotes"
-if [ -x "$APOLLO_DIR/backend/update" ]; then
+if [ -x "$APOLLO_DIR/backend/update" ] || [ "$DRY_RUN" = "1" ]; then
   run bash "$APOLLO_DIR/backend/update"
 else
   err "$APOLLO_DIR/backend/update not found — is this a supported Apollo OS version?"; exit 1
@@ -112,6 +112,10 @@ fi
 SWITCH="$APOLLO_DIR/backend/switch_bitcoin_software.sh"
 if [ -x "$SWITCH" ]; then
   info "selecting node client: $TARGET_CLIENT"
+  run bash "$SWITCH" "$TARGET_CLIENT"
+elif [ "$DRY_RUN" = "1" ]; then
+  info "selecting node client: $TARGET_CLIENT"
+  info "(note: $SWITCH is not present on this OS yet; the update step above installs it on 2.1.x)"
   run bash "$SWITCH" "$TARGET_CLIENT"
 else
   err "switch_bitcoin_software.sh not found — your Apollo OS may predate the client selector (needs 2.1.x)."
