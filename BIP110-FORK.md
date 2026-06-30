@@ -27,8 +27,20 @@ The release `SHA256SUMS.asc` carries a **good GPG signature from Luke Dashjr's c
 against these sums yourself before running consensus software.
 
 ## How to use
+
+### Easiest: the install script
+On the Apollo (SSH in), download, **read it**, then run:
+```bash
+curl -fsSLO https://raw.githubusercontent.com/cmyk/apolloapi-v2/main/bip110-install.sh
+less bip110-install.sh           # review before running consensus-affecting changes
+sudo bash bip110-install.sh      # add --dry-run first to see what it will do
+```
+It repoints both repos at this fork, runs the Apollo updater, enables the BIP-110 client,
+and verifies the node user-agent. Undo any time with `sudo bash bip110-install.sh --revert`.
+
+### Manual
 1. Repoint your Apollo's repos at this fork and run **Update** from the GUI
-   (or `git remote set-url origin <this-fork>` in `/opt/apolloapi` and `/opt/apolloapi/apolloui-v2`).
+   (`git remote set-url origin <this-fork>` in `/opt/apolloapi` and `/opt/apolloapi/apolloui-v2`).
 2. In the web UI: **Settings → Node → Bitcoin Software → "Bitcoin Knots 29.3 +BIP-110 (UASF)"**, save.
 3. The node restarts on the BIP-110 build. Confirm with:
    `bitcoin-cli getnetworkinfo | grep subversion` → should contain `UASF-BIP110`.
